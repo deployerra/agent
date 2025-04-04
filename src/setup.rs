@@ -82,10 +82,10 @@ fn install_docker(distro: &str) {
         match version_result {
             Ok(output) if output.status.success() => {
                 let release_info = String::from_utf8_lossy(&output.stdout);
-                if release_info.contains("Amazon Linux 2") {
-                    "sudo amazon-linux-extras install -y docker"
-                } else if release_info.contains("Amazon Linux release 2023") {
+                if release_info.contains("Amazon Linux release 2023") {
                     "sudo yum install -y docker"
+                } else if release_info.contains("Amazon Linux release 2") {
+                    "sudo amazon-linux-extras install -y docker"
                 } else {
                     eprintln!("Unsupported Amazon Linux version");
                     return;
