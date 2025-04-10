@@ -3,7 +3,7 @@ use std::process;
 use clap::{CommandFactory, Parser, Subcommand};
 use validations::has_sudo_access;
 
-mod setup;
+mod docker;
 mod validations;
 
 /// Program by deployerra to manage deployements on the server side.
@@ -58,7 +58,7 @@ fn main() {
 
     match args.command {
         Some(Commands::Setup) => {
-            setup::setup(distro);
+            docker::setup(distro);
         }
         None => {
             println!("No command was provided! Please read the following instructions:\n");

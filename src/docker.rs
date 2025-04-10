@@ -1,7 +1,7 @@
 use std::process::{Command, Stdio};
 
 pub fn setup(distro: String) {
-    if !check_command("docker") {
+    if !check_docker() {
         println!("docker not found");
         println!("proceeding to install docker and docker compose");
         install_docker(&distro);
@@ -22,10 +22,10 @@ pub fn setup(distro: String) {
     println!("setup complete");
 }
 
-fn check_command(cmd: &str) -> bool {
+fn check_docker() -> bool {
     Command::new("sh")
         .arg("-c")
-        .arg(format!("command -v {}", cmd))
+        .arg(format!("command -v docker" ))
         .output()
         .map(|output| output.status.success())
         .unwrap_or(false)
